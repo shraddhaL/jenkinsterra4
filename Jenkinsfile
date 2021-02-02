@@ -10,7 +10,7 @@ pipeline {
     stages { 	
 	    stage('Clone repository') {
 			   steps {	       
-				git branch: 'main', url:'https://github.com/ShivaniJ-hub/MusicStoreDemo.git'//git 'https://github.com/shraddhaL/jenkinsdocker-local.git'   }
+				git 'https://github.com/shraddhaL/jenkinsdocker-local.git'
 			   }
 			   }
 	    
@@ -25,7 +25,7 @@ pipeline {
 	  stage('Build Image') {
             steps {
                 script {
-                	app = docker.build("shivani221/mytomcatimage")
+                	app = docker.build("shraddhal/tomcat_develop")
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
       stage('Docker Tomcat server') {
               steps {
                		
-			sh 'docker run -d --name mytomcatimage -p 9090:8080 shivani221/mytomcatimage:latest'
+			sh 'docker run -d --name mytomcat -p 9090:8080 shraddhal/tomcat_develop:latest'
 		      
             }
         }
