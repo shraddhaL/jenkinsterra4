@@ -10,7 +10,7 @@ pipeline {
 		 UUID uuid = UUID.randomUUID()
     }
     stages { 	
-	    stage('Clone repository') {
+	 /*   stage('Clone repository') {
 			   steps {	       
 				git 'https://github.com/shraddhaL/jenkinsterra4.git'
 			   }
@@ -48,7 +48,7 @@ pipeline {
 			    }
           }
         }
-      }
+      }*/
       
       stage('Docker Tomcat server') {
               steps {
@@ -66,6 +66,10 @@ pipeline {
 		       script{
 			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html', returnStdout: true)
 			  def uuid_generated= env.uuid 
+			       echo var
+			       echo uuid_generated
+			       sh 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html'
+			       sh '$uuid'
 		 if(uuid_generated.equals(var))
 		      echo 'Latest version'
 		 else
@@ -74,7 +78,7 @@ pipeline {
 		      
             }
         }
-	    
+	/*    
 	    
   stage('compose') {
             steps { 
@@ -116,7 +120,7 @@ pipeline {
 	
 	     
 			    
-          stage('UUID Monitor') {
+       /*   stage('UUID Monitor') {
              steps {
                  
                     sh '''url='http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/game.html'
@@ -133,6 +137,6 @@ code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" 
                
              }
          } 
-
+*/
     }
 }
