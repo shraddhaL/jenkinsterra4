@@ -95,24 +95,33 @@ pipeline {
 	    }
 	 }
 	 
-	     stage('compose-down') {
-            steps { 
-		    dir('end_to_end') {
-			 script {
-			sh 'docker-compose down'
-                 }
-		}   
-	    }
-        }
+	    
+	    stage('Parallel Stages') {
+		    parallel {
+			    
+			    stage('docker clean') {
+					    steps { 
+						    dir('end_to_end') {
+							 script {
+							sh 'docker-compose down'
+							sh 'docker rm -f mytomcat'
+						 }
+						}   
+				    }
+				}
 
 	  
 	    stage('Deploy on azure vm') {
-             steps {
-		   
-             deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/')], contextPath: 'roshambo', onFailure: false, war: 'roshambo/target/*.war'
-             }
-         }
-         
+			     steps {
+
+			     deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/')], contextPath: 'roshambo', onFailure: false, war: 'roshambo/target/*.war'
+			     }
+         		}
+			    
+		    }
+	    }
+	     
+	    
           stage('UUID Monitor') {
              steps {
                  
@@ -131,10 +140,5 @@ code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" 
              }
          } 
 
-    }
-    post{
-	     always{
-     sh 'docker rm -f mytomcat'
-                         }
     }
 }
