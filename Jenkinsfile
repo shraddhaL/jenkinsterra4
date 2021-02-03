@@ -21,6 +21,7 @@ pipeline {
 		steps {
 			  sh '''
 				echo $uuid> src/main/webapp/version.html
+				cat src/main/webapp/version.html
 				echo UUID=$uuid> propsfile'''
         }
         }
@@ -36,7 +37,7 @@ pipeline {
 	  stage('Build Image') {
             steps {
                 script {
-                	app = docker.build registry + ":${BUILD_NUMBER}"
+                	app = docker.build(registry)
                 }
             }
         }
@@ -64,7 +65,7 @@ pipeline {
               steps {
                		
 			sh '''sleep 15
-			var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html" |grep "$UUID" |wc -l)
+			var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html" |grep $uuid |wc -l)
 			if [ $var -eq 1 ]
 			then
 			    echo "Latest Version"
@@ -114,6 +115,7 @@ pipeline {
 			    //bat 'docker system prune --all --volumes --force'
 		   // sh 'cat propsfile'
 			//--> //sh 'mvn -Dtest="SearchTest.java,SearchTest2.java" test'
+			    sh '$uuid'
 			  sh 'mvn clean -Dtest="UUIDTest.java" test  -Duuid="$uuid"'
 		    }}
 	    }
