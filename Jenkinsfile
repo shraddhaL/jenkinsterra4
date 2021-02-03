@@ -20,7 +20,9 @@ pipeline {
 	     stage('UUID gen') {
 	    
 		steps {
-			  sh 'echo $uuidver> src/main/webapp/version.html'
+			//  sh 'echo $uuidver> src/main/webapp/version.html'
+			
+                writeFile file: "src/main/webapp/version.html", text: uuidver
         }
         }
 	    
@@ -59,7 +61,7 @@ pipeline {
                		
 			sh 'sleep 20'
 		      
-		       /*script{
+		       script{
 			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html', returnStdout: true)
 		 if(env.uuidver == var)
 		      echo 'Latest version'
@@ -67,8 +69,8 @@ pipeline {
 		      echo 'Older version'
 			       
 			        
-		      }*/
-		      
+		      }
+		   /*   
 		    sh '''var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html" |grep $uuidver |wc -l)
 			if [ $var -eq 1 ]
 			then
@@ -76,7 +78,7 @@ pipeline {
 			else
 			    echo "Old Version"
 			fi''' 
-		      
+		      */
 		      
 		      
             }
