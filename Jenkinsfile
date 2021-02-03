@@ -8,7 +8,7 @@ pipeline {
         registryCredential ='docker_hub'
 		 registry = "shraddhal/tomcat_develop"
 		// UUID uuid = UUID.randomUUID()
-		  uuid = UUID.randomUUID().toString()
+		  uuidver = UUID.randomUUID().toString()
     }
     stages { 	
  stage('Clone repository') {
@@ -20,7 +20,7 @@ pipeline {
 	     stage('UUID gen') {
 	    
 		steps {
-			  sh 'echo $uuid> src/main/webapp/version.html'
+			  sh 'echo $uuidver> src/main/webapp/version.html'
         }
         }
 	    
@@ -61,7 +61,7 @@ pipeline {
 		      
 		       script{
 			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html', returnStdout: true)
-		 if(env.uuid == var)
+		 if(env.uuidver == var)
 		      echo 'Latest version'
 		 else
 		      echo 'Older version'
