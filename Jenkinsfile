@@ -95,11 +95,7 @@ pipeline {
 	    }
 	 }
 	 
-	 
-	       
-	    stage('Parallel Stages') {
-		    parallel {	  
-			    stage('docker clean') {
+	   stage('docker clean') {
 					    steps { 
 						    dir('end_to_end') {
 							 script {
@@ -116,9 +112,7 @@ pipeline {
 			     deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/')], contextPath: 'roshambo', onFailure: false, war: 'roshambo/target/*.war'
 			     }
          		}
-			    
-	  }
-	    }
+	
 	     
 			    
           stage('UUID Monitor') {
