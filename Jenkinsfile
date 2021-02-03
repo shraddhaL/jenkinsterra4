@@ -69,7 +69,7 @@ pipeline {
 			        
 		      }*/
 		      
-		    sh '''var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/MusicStore/version.html" |grep $uuidver |wc -l)
+		    sh '''var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html" |grep $uuidver |wc -l)
 			if [ $var -eq 1 ]
 			then
 			    echo "Latest Version"
