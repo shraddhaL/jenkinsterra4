@@ -7,7 +7,8 @@ pipeline {
 	 environment {
         registryCredential ='docker_hub'
 		 registry = "shraddhal/tomcat_develop"
-		 UUID uuid = UUID.randomUUID()
+		// UUID uuid = UUID.randomUUID()
+		 UUID uuid = UUID.randomUUID().toString()
     }
     stages { 	
  stage('Clone repository') {
@@ -69,9 +70,7 @@ pipeline {
 			       echo var
 			       echo uuid_generated
 			       sh 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html'
-			       
-			        var.getClass()
-			        uuid_generated.getClass()
+			  
 			       
 			       
 		 if(uuid_generated.equals(var))
@@ -79,6 +78,10 @@ pipeline {
 		 else
 		      echo 'Older version'
 		      }
+		      
+		           
+			        var.getClass()
+			        uuid_generated.getClass()
 		     /* 
 		      var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/MusicStore/version.html" |grep $uuid |wc -l)
 			if [ $var -eq 1 ]
