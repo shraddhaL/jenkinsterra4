@@ -10,5 +10,5 @@ resource "docker_container" "tomcat_container" {
 }
 
 resource "docker_image" "tomcat_image" {
-  name = "shraddhal/tomcat_develop:latest"
+  name = "shraddhal/tomcat_develop"
 }
