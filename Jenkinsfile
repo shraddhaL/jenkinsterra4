@@ -98,7 +98,7 @@ pipeline {
 	 stage('end to end testing') {
             steps {
 		    dir('end_to_end') { script {
-			  sh 'mvn clean -Dtest="UUIDTest.java" test  -Duuid="$uuid"'
+			  sh 'mvn clean -Dtest="UUIDTest.java" test  -Duuid="$uuidver"'
 		    }}
 	    }
 	 }
