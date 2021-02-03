@@ -70,9 +70,9 @@ pipeline {
 			       echo uuid_generated
 			       sh 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html'
 			       
-			       echo var.getClass()
-			       echo uuid_generated.getClass()
-			       echo uuid_generated.equals(var)
+			        var.getClass()
+			        uuid_generated.getClass()
+			       
 			       
 		 if(uuid_generated.equals(var))
 		      echo 'Latest version'
@@ -80,7 +80,7 @@ pipeline {
 		      echo 'Older version'
 		      }
 		     /* 
-		      var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/MusicStore/version.html" |grep "$UUID" |wc -l)
+		      var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/MusicStore/version.html" |grep $uuid |wc -l)
 			if [ $var -eq 1 ]
 			then
 			    echo "Latest Version"
