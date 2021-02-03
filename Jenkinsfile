@@ -7,6 +7,7 @@ pipeline {
 	 environment {
         registryCredential ='docker_hub'
 		 registry = "shraddhal/tomcat_develop"
+		 UUID uuid = UUID.randomUUID()
     }
     stages { 	
 	    stage('Clone repository') {
@@ -18,11 +19,9 @@ pipeline {
 	     stage('UUID gen') {
 	    
 		steps {
-			  sh '''name=$(uuidgen)
-				touch src/main/webapp/version.html
-				echo $name
-				echo $name> src/main/webapp/version.html
-				echo UUID=$name> propsfile'''
+			  sh '''
+				echo $uuid> src/main/webapp/version.html
+				echo UUID=$uuid> propsfile'''
         }
         }
 	    
@@ -115,9 +114,7 @@ pipeline {
 			    //bat 'docker system prune --all --volumes --force'
 		   // sh 'cat propsfile'
 			//--> //sh 'mvn -Dtest="SearchTest.java,SearchTest2.java" test'
-			  sh '''var=$name
-				echo $var
-			mvn clean -Dtest="UUIDTest.java" test  -Duuid="$var"'''
+			  sh 'mvn clean -Dtest="UUIDTest.java" test  -Duuid="$uuid"'
 		    }}
 	    }
 	 }
