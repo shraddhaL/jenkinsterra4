@@ -1,10 +1,4 @@
-terraform {
- required_version = "~>0.12"
-}
 
-provider "docker" {
-  
-  }
 
 resource "docker_container" "tomcat_container" {
   name  = "mytomcat"
