@@ -57,7 +57,7 @@ pipeline {
 	     stage('UUID develop check') {
               steps {
                		
-			sh 'sleep 10'
+			sh 'sleep 20'
 		      
 		       script{
 			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html', returnStdout: true)
@@ -66,8 +66,7 @@ pipeline {
 		 else
 		      echo 'Older version'
 			       
-			          var.getClass()
-			        uuid_generated.getClass()
+			        
 		      }
 		      
 		           
