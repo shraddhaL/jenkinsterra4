@@ -19,9 +19,9 @@ pipeline {
 	    
 		steps {
 			  sh '''name=$(uuidgen)
-				touch /src/main/webapp/version.html
+				touch src/main/webapp/version.html
 				echo $name
-				echo $name> /src/main/webapp/version.html
+				echo $name> src/main/webapp/version.html
 				echo UUID=$name> propsfile'''
         }
         }
