@@ -5,7 +5,7 @@ pipeline {
         
     } 
 	 environment {
-        registryCredential ='docker'
+        registryCredential ='7d1e9b8f-6abf-4529-a30c-99f9173c2f2f'
     }
     stages { 	
 	    stage('Clone repository') {
@@ -56,12 +56,15 @@ pipeline {
         } 
         
         
-         stage('Docker Cleanup') {
-              steps {//  sh 'docker stop mytomcatimage'
-			//sh 'docker rm mytomcatimage'
- 		        sh 'docker system prune --all --volumes --force'
-            }
-        }
-        
+steps {
+          sh "pwd"
+          dir('end_to_end'){
+            sh "pwd"
+          }
+          sh "pwd"
+        }   
+	 
+	    
+	  
         }
 }
