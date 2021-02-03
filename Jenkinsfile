@@ -113,7 +113,7 @@ pipeline {
 			    //bat 'docker system prune --all --volumes --force'
 		   // sh 'cat propsfile'
 			//--> //sh 'mvn -Dtest="SearchTest.java,SearchTest2.java" test'
-			    sh '$uuid'
+			    sh 'echo $uuid'
 			  sh 'mvn clean -Dtest="UUIDTest.java" test  -Duuid="$uuid"'
 		    }}
 	    }
