@@ -52,14 +52,14 @@ protected WebDriver driver;
         driver.manage().window().maximize();
         
         
-        driver.get("http://devopsteamgoa.westindia.cloudapp.azure.com:9090/MusicStore/index.html");  
+        driver.get("http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/game.html");  
         // get the current URL of the page   
         String URL= driver.getCurrentUrl();  
         System.out.println("current URL of the page fetched: "+URL); 
         //get the title of the page  
         String title = driver.getTitle();                  
         System.out.println("Title: "+title);  
-        if(title.equals("MusicStore"))
+        if(title.equals("Rock Paper Scissors!!!"))
              {Assert.assertTrue(true);
              System.out.println("1");  
              }
