@@ -2,7 +2,7 @@
 
 resource "docker_container" "tomcat_container" {
   name  = "mytomcat"
-  image = docker_image.tomcat_image.latest
+  image = docker_image.tomcat_image.name
   ports = {
     internal = "8080"
     external = "9090"
