@@ -3,7 +3,7 @@ terraform {
 }
 
 provider "docker" {
-  host = "tcp://docker:2345/"
+  
   }
 
 resource "docker_container" "tomcat_container" {
