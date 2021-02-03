@@ -55,7 +55,7 @@ pipeline {
             }
         } 
         
-        
+	    stage('pwd')  {
 steps {
           sh "pwd"
           dir('end_to_end'){
@@ -63,7 +63,7 @@ steps {
           }
           sh "pwd"
         }   
-	 
+	    }
 	    
 	  
         }
