@@ -65,6 +65,7 @@ pipeline {
               steps {
                		
 			sh '''sleep 15
+			echo $uuid
 			var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html" |grep $uuid |wc -l)
 			if [ $var -eq 1 ]
 			then
@@ -87,7 +88,7 @@ pipeline {
        /*   dir(''){
             sh "pwd"
           }*/
-          
+/*          
   stage('compose') {
             steps { 
 		    dir('end_to_end') {
@@ -99,7 +100,7 @@ pipeline {
 		}
                
 	    }
-        }
+        }*/
 	 
 	/*    stage('archive Artifacts') {
             steps {
@@ -108,7 +109,7 @@ pipeline {
 			}
 	    }
         }  */
-
+/*
 	 stage('end to end testing') {
             steps {
 		    dir('end_to_end') { script {
@@ -133,7 +134,7 @@ pipeline {
 
 
 	   
-	    
+	    */
 	  
         }
 }
