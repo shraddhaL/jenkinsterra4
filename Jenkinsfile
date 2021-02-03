@@ -81,7 +81,7 @@ pipeline {
 		      
             }
         }
-	/*    
+	 
 	    
   stage('compose') {
             steps { 
@@ -117,7 +117,7 @@ pipeline {
 	  
 	    stage('Deploy on azure vm') {
 			     steps {
-		           //  deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/')], contextPath: 'roshambo', onFailure: false, war: '.war'
+		           //  deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/')], contextPath: 'roshambo', onFailure: false, war: '**/*.war'
 		             }
          		}
    stage('UUID Monitor') {
@@ -125,22 +125,21 @@ pipeline {
                  
                     sh '''url='http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/game.html'
 		    
-code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null`'''
+		code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null`'''
 		     
-		     script{
-			def uuid_res = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/version.html', returnStdout: true)
-		 if(env.uuid == uuid_res)
-		      echo 'Latest version'
-		 else
-		      echo 'Older version'
-		      }
+		     
+		       sh '''var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/version.html" |grep $uuidver |wc -l)
+			if [ $var -eq 1 ]
+			then
+			    echo "Latest Version"
+			else
+			    echo "Old Version"
+			fi''' 
+		      
                
              }
          } 
 	 
-	 * * / *
-		 
-		 
-*/
+	 
     }
 }
