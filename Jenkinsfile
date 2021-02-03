@@ -130,6 +130,26 @@ pipeline {
         }
 
 	  
+	    stage('Deploy on azure vm') {
+             steps {
+             deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8080/')], contextPath: 'roshambo', war: '**/*.war'
+             }
+         }
+         
+          stage('Monitor') {
+             steps {
+                 
+                    sh '''url='http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/game.html'
+code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null`'''
+                 
+               
+             }
+         } 
+	    
+/*	    
+curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null
+	*/    
+	    
     }
     post{
 	     always{
