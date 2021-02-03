@@ -1,5 +1,5 @@
 FROM tomcat:latest
 
-Copy /target/*.war /usr/local/tomcat/webapps
+Copy /target/*.war /opt/tomcat/tomcat9/webapps
 
 Expose 8080
