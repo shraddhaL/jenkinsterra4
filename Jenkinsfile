@@ -65,8 +65,8 @@ pipeline {
 		      
 		       script{
 			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html', returnStdout: true)
-			     
-		 if(env.uuid.toString() == var)
+			  def uuid_generated= env.uuid 
+		 if(uuid_generated.equals(var))
 		      echo 'Latest version'
 		 else
 		      echo 'Older version'
