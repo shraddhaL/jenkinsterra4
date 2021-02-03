@@ -132,7 +132,8 @@ pipeline {
 	  
 	    stage('Deploy on azure vm') {
              steps {
-             deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8080/')], contextPath: 'roshambo', war: '**/*.war'
+		     sh ''
+             deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/')], contextPath: 'roshambo', onFailure: false, war: 'roshambo/target/*.war'
              }
          }
          
