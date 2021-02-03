@@ -30,8 +30,6 @@ pipeline {
 		        sh 'mvn clean package'
         }
         }
-	   
-	    
 	  stage('Build Image') {
             steps {
                 script {
@@ -39,7 +37,6 @@ pipeline {
                 }
             }
         }
-	    
 	       stage('Docker Push') {
             steps {
 		    script{
@@ -52,10 +49,8 @@ pipeline {
       }
       
       stage('Docker Tomcat server') {
-              steps {
-               		
+	      steps {
 			sh 'docker run -d --name mytomcat -p 9090:8080 shraddhal/tomcat_develop:latest'
-		      
             }
         }
 	    
@@ -66,14 +61,7 @@ pipeline {
 		      
 		       script{
 			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html', returnStdout: true)
-			  def uuid_generated= env.uuid 
-			       echo var
-			       echo uuid_generated
-			       sh 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html'
-			  
-			       
-			       
-		 if(uuid_generated.equals(var))
+		 if(env.uuid == var)
 		      echo 'Latest version'
 		 else
 		      echo 'Older version'
