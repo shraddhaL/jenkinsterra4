@@ -5,7 +5,7 @@ pipeline {
         
     } 
 	 environment {
-        registryCredential ='7d1e9b8f-6abf-4529-a30c-99f9173c2f2f'
+        registryCredential ='docker_hub'
     }
     stages { 	
 	    stage('Clone repository') {
