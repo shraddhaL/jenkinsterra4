@@ -8,7 +8,7 @@ pipeline {
         registryCredential ='docker_hub'
 		 registry = "shraddhal/tomcat_develop"
 		// UUID uuid = UUID.randomUUID()
-		 UUID uuid = UUID.randomUUID().toString()
+		  uuid = UUID.randomUUID().toString()
     }
     stages { 	
  stage('Clone repository') {
