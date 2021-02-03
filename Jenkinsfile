@@ -10,7 +10,7 @@ pipeline {
 		 UUID uuid = UUID.randomUUID()
     }
     stages { 	
-	 /*   stage('Clone repository') {
+ stage('Clone repository') {
 			   steps {	       
 				git 'https://github.com/shraddhaL/jenkinsterra4.git'
 			   }
@@ -48,7 +48,7 @@ pipeline {
 			    }
           }
         }
-      }*/
+      }
       
       stage('Docker Tomcat server') {
               steps {
@@ -61,7 +61,7 @@ pipeline {
 	     stage('UUID develop check') {
               steps {
                		
-			sh 'sleep 20'
+			sh 'sleep 10'
 		      
 		       script{
 			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html', returnStdout: true)
