@@ -50,21 +50,35 @@ pipeline {
             }
         }
 	 
-	 stage('archive') {
+	 /*stage('archive') {
               steps {
                		archiveArtifacts  'target/*.war'
             }
-        } 
+        } */
         
-	    stage('pwd')  {
-steps {
-          sh "pwd"
-          dir('end_to_end'){
+	  
+       /*   dir(''){
             sh "pwd"
-          }
-          sh "pwd"
-        }   
+          }*/
+          
+  stage('compose') {
+            steps { 
+		    dir('end_to_end') {
+			 script {
+			//sh 'docker run -d -p 4444:4444 --memory="1.5g" --memory-swap="2g" -v /dev/shm:/dev/shm selenium/standalone-chrome'
+			sh 'docker-compose up -d --scale chrome=3'
+			
+                }
+			}
+               
 	    }
+        }
+	 
+	    
+	    
+
+
+	   
 	    
 	  
         }
