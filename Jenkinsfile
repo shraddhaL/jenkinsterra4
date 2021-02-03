@@ -106,7 +106,13 @@ pipeline {
             }
         }
 	 
-	    
+	   stage('terraform apply') {
+	      steps {
+                    sh 'terraform destroy --auto-approve'
+		      //terraform destroy -target=resource_type.resource_name
+	      }
+        }
+	  
  
 	 
 	 
