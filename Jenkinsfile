@@ -64,15 +64,17 @@ pipeline {
 	     stage('UUID develop check') {
               steps {
                		
-			sh '''sleep 15
-			echo $uuid
-			var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html" |grep $uuid |wc -l)
-			if [ $var -eq 1 ]
-			then
-			    echo "Latest Version"
-			else
-			    echo "Old Version"
-			fi '''
+			sh 'sleep 15'
+		      
+		       script{
+			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html', returnStdout: true)
+		 if(env.uuid == var)
+		      echo 'Latest version'
+		 else
+		      echo 'Older version'
+		      }
+		      
+		      
 		      
             }
         }
@@ -141,8 +143,16 @@ pipeline {
              steps {
                  
                     sh '''url='http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/game.html'
+		    
 code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null`'''
-                 
+		     
+		     script{
+			def uuid_res = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/version.html', returnStdout: true)
+		 if(env.uuid == uuid_res)
+		      echo 'Latest version'
+		 else
+		      echo 'Older version'
+		      }
                
              }
          } 
