@@ -130,7 +130,10 @@ pipeline {
         }
 
 	  
-    }post{
+    }
+    post{
+	     always{
      sh 'docker rm -f mytomcat'
+                         }
     }
 }
