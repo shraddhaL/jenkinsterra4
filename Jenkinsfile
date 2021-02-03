@@ -10,7 +10,7 @@ pipeline {
     stages { 	
 	    stage('Clone repository') {
 			   steps {	       
-				git 'https://github.com/shraddhaL/jenkinsdocker-local.git'
+				git 'https://github.com/shraddhaL/jenkinsterra4.git'
 			   }
 			   }
 	    
