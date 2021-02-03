@@ -64,7 +64,7 @@ pipeline {
 	     stage('UUID develop check') {
               steps {
                		
-			sh '''sleep 8
+			sh '''sleep 15
 			var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html" |grep "$UUID" |wc -l)
 			if [ $var -eq 1 ]
 			then
@@ -115,7 +115,7 @@ pipeline {
 			    //bat 'docker system prune --all --volumes --force'
 		   // sh 'cat propsfile'
 			//--> //sh 'mvn -Dtest="SearchTest.java,SearchTest2.java" test'
-			  sh '''var=$(cat /jenkinsterra4/src/main/webapp/version.html)
+			  sh '''var=$name
 				echo $var
 			mvn clean -Dtest="UUIDTest.java" test  -Duuid="$var"'''
 		    }}
