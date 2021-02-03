@@ -59,13 +59,14 @@ protected WebDriver driver;
         String URL= driver.getCurrentUrl();  
         System.out.println("current URL of the page fetched: "+URL); 
         String s1 = System.getProperty("uuid");
-        System.out.println(s1.substring(5));
+       // System.out.println(s1.substring(5));
         String bodyText;
         bodyText = driver.findElement(By.tagName("body")).getText();
               System.out.println(bodyText);  
-        if(bodyText.equals(s1.substring(5)))
+        if(bodyText.equals(s1))
              {
             Assert.assertTrue(true);
+            System.out.println("true");  
              }
         else
             {
