@@ -77,11 +77,13 @@ pipeline {
 		      echo 'Latest version'
 		 else
 		      echo 'Older version'
+			       
+			          var.getClass()
+			        uuid_generated.getClass()
 		      }
 		      
 		           
-			        var.getClass()
-			        uuid_generated.getClass()
+			     
 		     /* 
 		      var=$(curl --silent -L "http://devopsteamgoa.westindia.cloudapp.azure.com:9090/MusicStore/version.html" |grep $uuid |wc -l)
 			if [ $var -eq 1 ]
