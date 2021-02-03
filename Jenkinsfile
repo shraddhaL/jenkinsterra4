@@ -19,10 +19,7 @@ pipeline {
 	     stage('UUID gen') {
 	    
 		steps {
-			  sh '''
-				echo $uuid> src/main/webapp/version.html
-				cat src/main/webapp/version.html
-				echo UUID=$uuid> propsfile'''
+			  sh 'echo $uuid> src/main/webapp/version.html'
         }
         }
 	    
@@ -64,7 +61,7 @@ pipeline {
 	     stage('UUID develop check') {
               steps {
                		
-			sh 'sleep 15'
+			sh 'sleep 20'
 		      
 		       script{
 			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html', returnStdout: true)
@@ -74,23 +71,10 @@ pipeline {
 		      echo 'Older version'
 		      }
 		      
-		      
-		      
             }
         }
 	    
-	 
-	 /*stage('archive') {
-              steps {
-               		archiveArtifacts  'target/*.war'
-            }
-        } */
-        
-	  
-       /*   dir(''){
-            sh "pwd"
-          }*/
-         
+	    
   stage('compose') {
             steps { 
 		    dir('end_to_end') {
@@ -101,21 +85,11 @@ pipeline {
 		}
 	    }
         }
-	/*    stage('archive Artifacts') {
-            steps {
-                script {
-			archiveArtifacts artifacts: 'docker-compose.yml', followSymlinks: false
-			}
-	    }
-        }  */
+	
 
 	 stage('end to end testing') {
             steps {
 		    dir('end_to_end') { script {
-			    //bat 'docker system prune --all --volumes --force'
-		   // sh 'cat propsfile'
-			//--> //sh 'mvn -Dtest="SearchTest.java,SearchTest2.java" test'
-			    sh 'echo $uuid'
 			  sh 'mvn clean -Dtest="UUIDTest.java" test  -Duuid="$uuid"'
 		    }}
 	    }
@@ -139,7 +113,7 @@ pipeline {
              }
          }
          
-          stage('Monitor') {
+          stage('UUID Monitor') {
              steps {
                  
                     sh '''url='http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/game.html'
@@ -156,11 +130,7 @@ code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" 
                
              }
          } 
-	    
-/*	    
-curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null
-	*/    
-	    
+
     }
     post{
 	     always{
