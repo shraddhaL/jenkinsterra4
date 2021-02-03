@@ -70,6 +70,10 @@ pipeline {
 			       echo uuid_generated
 			       sh 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:9090/roshambo/version.html'
 			       
+			       echo var.getClass()
+			       echo uuid_generated.getClass()
+			       echo uuid_generated.equals(var)
+			       
 		 if(uuid_generated.equals(var))
 		      echo 'Latest version'
 		 else
