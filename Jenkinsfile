@@ -6,6 +6,7 @@ pipeline {
     } 
 	 environment {
         registryCredential ='docker_hub'
+		 registry = "shraddhal/tomcat_develop"
     }
     stages { 	
 	    stage('Clone repository') {
@@ -25,7 +26,7 @@ pipeline {
 	  stage('Build Image') {
             steps {
                 script {
-                	app = docker.build("shraddhal/tomcat_develop")
+                	app = docker.build registry + ":${BUILD_NUMBER}"
                 }
             }
         }
