@@ -1,4 +1,10 @@
-provider "docker" {}
+terraform {
+ required_version = "~>0.12"
+}
+
+provider "docker" {
+  host = "tcp://docker:2345/"
+  }
 
 resource "docker_container" "tomcat_container" {
   name  = "mytomcat"
