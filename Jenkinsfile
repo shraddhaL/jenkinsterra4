@@ -96,8 +96,9 @@ pipeline {
 	 }
 	 
 	 
-	    
-			    
+	       
+	    stage('Parallel Stages') {
+		    parallel {	  
 			    stage('docker clean') {
 					    steps { 
 						    dir('end_to_end') {
@@ -116,7 +117,10 @@ pipeline {
 			     }
          		}
 			    
-	
+	  }
+	    }
+	     
+			    
           stage('UUID Monitor') {
              steps {
                  
