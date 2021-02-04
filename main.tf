@@ -101,7 +101,9 @@ resource "null_resource" "copy_execute" {
       host        = aws_instance.web.public_ip 
       private_key = file("azureaws.pem")
     }
-    inline = "sudo mkdir -p /end_to_end"
+    inline = [
+      "sudo mkdir -p /end_to_end",
+      ]
   }
   
   
