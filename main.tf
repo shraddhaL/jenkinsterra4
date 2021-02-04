@@ -33,7 +33,7 @@ resource "docker_image" "tomcat_image" {
 resource "aws_instance" "web" {
   ami = "ami-01aab85a5e4a5a0fe" 
     instance_type = "t2.micro"
-  vpc_security_group_ids = ["${aws_security_group.webSG.id}"]
+  vpc_security_group_ids = [aws_security_group.webSG.id]
    key_name = "azureaws"
    associate_public_ip_address = true
    tags = {
@@ -107,7 +107,8 @@ provisioner "file" {
       private_key = file("azureaws.pem")
     }
     inline = [
-      "chmod 777 /end_to_end/docker-compose.yml",
+      "chmod +x /end_to_end",
+      "chmod +x /end_to_end/docker-compose.yml",
       "cd /end_to_end",
       "sudo curl -L https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose",
       "sudo chmod +x /usr/local/bin/docker-compose",
