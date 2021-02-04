@@ -49,10 +49,7 @@ resource "null_resource" "copy_execute" {
       private_key = file("azureaws.pem")
     }
  
-  provisioner "file" {
-    source      = "end_to_end/docker-compose.yml"
-    destination = "/end_to_end/docker-compose.yml"
-  }
+ 
   
    provisioner "remote-exec" {
     inline = [
@@ -60,7 +57,10 @@ resource "null_resource" "copy_execute" {
       "docker-compose up -d --scale chrome=3",
     ]
   }
-  
+  provisioner "file" {
+    source      = "end_to_end/docker-compose.yml"
+    destination = "/end_to_end/docker-compose.yml"
+  } 
   depends_on = [ aws_instance.web ]
   
   }
