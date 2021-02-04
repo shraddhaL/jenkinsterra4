@@ -6,8 +6,11 @@ terraform {
       version = "2.11.0"
     }
     aws = {
-      source = "hashicorp/aws"
-      version = "3.26.0"
+     # source = "hashicorp/aws"
+     # version = "3.26.0"
+      access_key = "AKIAUKBXP6VHTML56ZNF"
+   secret_key = "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"
+   region = "us-east-2"
     }
   }
 }
@@ -26,25 +29,9 @@ resource "docker_image" "tomcat_image" {
 }
 
 
-
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-}
-
 resource "aws_instance" "web" {
-  ami = data.aws_ami.ubuntu.id
-    instance_type = "t3.micro"
+  ami = "ami-01aab85a5e4a5a0fe"
+    instance_type = "t2.micro"
   
   provisioner "file" {
     source      = "end_to_end/docker-compose.yml"
