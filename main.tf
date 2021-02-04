@@ -31,19 +31,4 @@ resource "docker_image" "tomcat_image" {
 }
 
 
-resource "aws_instance" "web" {
-  ami = "ami-01aab85a5e4a5a0fe"
-    instance_type = "t2.micro"
-  
-  provisioner "file" {
-    source      = "end_to_end/docker-compose.yml"
-    destination = "/end_to_end"
-  }
 
-  provisioner "remote-exec" {
-    inline = [
-      "cd /end_to_end",
-      "docker-compose up -d --scale chrome=3",
-    ]
-  }
-}
