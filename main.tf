@@ -23,8 +23,13 @@ resource "docker_image" "tomcat_image" {
 }
 
 resource "null_resource" "composedocker" {
+  
+   provisioner "local-exec" {
+    command = "cd end_to_end"
+  }
   provisioner "local-exec" {
     command = "docker-compose up -d --scale chrome=3"
-   
   }
+  
+  
 }
