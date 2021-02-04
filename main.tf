@@ -96,6 +96,13 @@ resource "null_resource" "copy_execute" {
 provisioner "file" {
     source      = "end_to_end/docker-compose.yml"
     destination = "/end_to_end/docker-compose.yml"
+  
+   connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = aws_instance.web.public_ip 
+      private_key = file("azureaws.pem")
+    }
   } 
 
   // change permissions to executable and pipe its output into a new file
