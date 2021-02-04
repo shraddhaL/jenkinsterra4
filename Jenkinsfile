@@ -105,6 +105,67 @@ pipeline {
 		      
             }
         }
+	    
+	    
+	     stage('compose') {
+            steps { 
+		    dir('end_to_end') {
+			 script {
+			sh 'docker-compose up -d --scale chrome=3'
+			
+                 }
+		}
+	    }
+        }
+	
+
+	 stage('end to end testing') {
+            steps {
+		    dir('end_to_end') { script {
+			  sh 'mvn clean -Dtest="UUIDTest.java" test  -Duuid="$uuidver"'
+		    }}
+	    }
+	 }
+	    stage('docker clean') {
+					    steps { 
+						    dir('end_to_end') {
+							 script {
+							sh 'docker-compose down'
+							sh 'docker rm -f mytomcat'
+						 }
+						}   
+				    }
+				}
+
+	  
+	    stage('Deploy on azure vm') {
+			     steps {
+		            deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://devopsteamgoa.westindia.cloudapp.azure.com:8081/')], contextPath: 'roshambo', onFailure: false, war: '**/*.war'
+		             }
+         		}
+	    
+	    
+	     stage('UUID Monitor') {
+             steps {
+                 
+                    sh '''url='http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/game.html'
+		    
+		code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null`'''
+		     
+		       script{
+			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/version.html', returnStdout: true)
+		 if(env.uuidver == var)
+		      echo 'Latest version'
+		 else
+		      echo 'Older version'
+			       
+			        
+		      }
+	     }
+         } 
+	    
+	    
+	    
 	 
 	   stage('terraform destroy') {
 	      steps {
