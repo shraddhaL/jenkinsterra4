@@ -5,9 +5,9 @@ terraform {
       source = "kreuzwerker/docker"
       version = "2.11.0"
     }
-     digitalocean = {
-      source = "digitalocean/digitalocean"
-      version = "2.5.0"
+     aws = {
+      source = "hashicorp/aws"
+      version = "3.26.0"
     }
   }
 }
@@ -25,8 +25,10 @@ resource "docker_image" "tomcat_image" {
   name = "shraddhal/tomcat_develop"
 }
 
-resource "digitalocean_droplet" "web" {
 
+resource "aws_instance" "web" {
+  ami = data.aws_ami.ubuntu.id
+  
   provisioner "file" {
     source      = "end_to_end/docker-compose.yml"
     destination = "/end_to_end"
