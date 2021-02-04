@@ -91,6 +91,20 @@ resource "null_resource" "copy_execute" {
     user        = "ec2-user"
     private_key = file("azureaws.pem")
   }
+  
+  
+  
+    provisioner "remote-exec" {
+      connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = aws_instance.web.public_ip 
+      private_key = file("azureaws.pem")
+    }
+    inline = "sudo mkdir -p /end_to_end"
+  }
+  
+  
 
   // copy our example script to the server
 provisioner "file" {
