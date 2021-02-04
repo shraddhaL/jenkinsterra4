@@ -23,9 +23,6 @@ resource "docker_image" "tomcat_image" {
 }
 
 resource "null_resource" "composedocker" {
-   command = <<EOT
-      cd end_to_end
-      docker-compose up -d --scale chrome=3
-  EOT
+   command = "cd end_to_end | docker-compose up -d --scale chrome=3"
 
 }
