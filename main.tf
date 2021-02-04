@@ -5,6 +5,10 @@ terraform {
       source = "kreuzwerker/docker"
       version = "2.11.0"
     }
+     digitalocean = {
+      source = "digitalocean/digitalocean"
+      version = "2.5.0"
+    }
   }
 }
 
