@@ -11,7 +11,7 @@ pipeline {
 		  uuidver = UUID.randomUUID().toString()
     }
     stages { 	
- stage('Clone repository') {
+/* stage('Clone repository') {
 			   steps {	       
 				git 'https://github.com/shraddhaL/jenkinsterra4.git'
 			   }
@@ -48,7 +48,9 @@ pipeline {
 			    }
           }
         }
-      }
+      }*/
+	    
+	    
       
    /*   stage('Docker Tomcat server') {
 	      steps {
