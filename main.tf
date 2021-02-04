@@ -30,11 +30,6 @@ resource "docker_image" "tomcat_image" {
   name = "shraddhal/tomcat_develop"
 }
 
-
-
-
-
-
 resource "aws_instance" "web" {
   ami = "ami-01aab85a5e4a5a0fe" 
     instance_type = "t2.micro"
@@ -108,15 +103,14 @@ provisioner "file" {
       connection {
       type        = "ssh"
       user        = "ec2-user"
-        
-    host        = aws_instance.web.public_ip 
+      host        = aws_instance.web.public_ip 
       private_key = file("azureaws.pem")
     }
     inline = [
-      "sudo curl -L https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose",
-      "sudo chmod +x /usr/local/bin/docker-compose",
       "sudo chmod 777 /end_to_end",
       "cd /end_to_end",
+      "sudo curl -L https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose",
+      "sudo chmod +x /usr/local/bin/docker-compose",
       "docker-compose --version",
       "docker-compose up -d --scale chrome=3",
     ]
