@@ -38,7 +38,7 @@ resource "docker_image" "tomcat_image" {
 resource "aws_instance" "web" {
   ami = "ami-01aab85a5e4a5a0fe" 
     instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.example.id]
+  vpc_security_group_ids = ["${aws_security_group.webSG.id}"]
    key_name = "azureaws"
    associate_public_ip_address = true
    tags = {
@@ -46,8 +46,8 @@ resource "aws_instance" "web" {
   }
 }
 
-resource "aws_security_group" "example" {
-  name = aws_instance.web
+resource "aws_security_group" "webSG" {
+  name        = "webSG"
 
   egress {
     from_port   = 0
