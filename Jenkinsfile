@@ -107,7 +107,7 @@ pipeline {
         }
 	    
 	    
-	     stage('compose') {
+	 /*    stage('compose') {
             steps { 
 		    dir('end_to_end') {
 			 script {
@@ -116,7 +116,7 @@ pipeline {
                  }
 		}
 	    }
-        }
+        }*/
 	
 
 	 stage('end to end testing') {
