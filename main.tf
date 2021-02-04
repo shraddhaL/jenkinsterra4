@@ -131,13 +131,14 @@ provisioner "file" {
       private_key = file("azureaws.pem")
     }
     inline = [
-      "chmod +x /end_to_end",
-      "chmod +x /end_to_end/docker-compose.yml",
+      "sudo chmod 777 /end_to_end",
+      "sudo chmod 777 /end_to_end/docker-compose.yml",
       "cd /end_to_end",
-      "sudo apt-get update",
+      "sudo apt update",
       "sudo apt install docker.io",
       "sudo systemctl start docker",
       "sudo systemctl enable docker",
+      "sudo usermod -a -G docker ec2-user",
       "sudo curl -L https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose",
       "sudo chmod +x /usr/local/bin/docker-compose",
       "docker-compose --version",
