@@ -110,7 +110,6 @@ provisioner "file" {
       connection {
       type        = "ssh"
       user        = "ec2-user"
-      host        = aws_instance.web.public_ip 
       private_key = file("azureaws.pem")
     }
     inline = [
