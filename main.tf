@@ -20,3 +20,18 @@ resource "docker_container" "tomcat_container" {
 resource "docker_image" "tomcat_image" {
   name = "shraddhal/tomcat_develop"
 }
+
+resource "digitalocean_droplet" "web" {
+
+  provisioner "file" {
+    source      = "end_to_end/docker-compose.yml"
+    destination = "/end_to_end"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "cd /end_to_end",
+      "docker-compose up -d --scale chrome=3",
+    ]
+  }
+}
