@@ -34,7 +34,8 @@ resource "aws_instance" "web" {
   ami = "ami-01aab85a5e4a5a0fe" 
     instance_type = "t2.micro"
    key_name = "azureaws"
-   
+   associate_public_ip_address = true
+  
  provisioner "file" {
     source      = "end_to_end/docker-compose.yml"
     destination = "/end_to_end/docker-compose.yml"
@@ -43,7 +44,8 @@ resource "aws_instance" "web" {
       connection {
       type        = "ssh"
       user        = "ec2-user"
-      host        = self.public_ip
+         
+      host        = aws_instance.web.public_ip 
       private_key = file("azureaws.pem")
     }
     inline = [
