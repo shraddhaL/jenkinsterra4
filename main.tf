@@ -94,7 +94,6 @@ resource "null_resource" "copy_execute" {
     type  = "ssh"
     host  = aws_instance.web.public_ip
     user        = "ec2-user"
-    host        = aws_instance.web.public_ip 
     private_key = file("azureaws.pem")
     agent = true
   }
@@ -110,6 +109,8 @@ provisioner "file" {
       connection {
       type        = "ssh"
       user        = "ec2-user"
+        
+    host        = aws_instance.web.public_ip 
       private_key = file("azureaws.pem")
     }
     inline = [
