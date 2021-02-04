@@ -43,7 +43,7 @@ resource "aws_instance" "web" {
       connection {
       type        = "ssh"
       user        = "ec2-user"
-      host        = self.ipv4_address
+      host        = self.public_ip
       private_key = file("azureaws.pem")
     }
     inline = [
