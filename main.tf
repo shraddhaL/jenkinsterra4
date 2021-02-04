@@ -12,10 +12,11 @@ terraform {
   }
 }
 provider "aws" {
-   access_key = "AKIAUKBXP6VHTML56ZNF"
-   secret_key = "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"
+   access_key = "AKIAUKBXP6VH4WUSR6GX"
+   secret_key = "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"
    region = "us-east-2"
 }
+
 resource "docker_container" "tomcat_container" {
   name  = "mytomcat"
   image = docker_image.tomcat_image.latest
