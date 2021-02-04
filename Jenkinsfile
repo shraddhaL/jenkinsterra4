@@ -43,7 +43,7 @@ pipeline {
             steps {
 		    script{
 			    docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
-			    app.push("${BUILD_NUMBER}")
+			  app.push("${BUILD_NUMBER}")
 			    app.push("latest")
 			    }
           }
@@ -128,7 +128,7 @@ pipeline {
 		    }}
 	    }
 	 }
-	    stage('docker clean') {
+	   /* stage('docker clean') {
 					    steps { 
 						    dir('end_to_end') {
 							 script {
@@ -138,7 +138,7 @@ pipeline {
 						}   
 				    }
 				}
-
+*/
 	  
 	    stage('Deploy on azure vm') {
 			     steps {
