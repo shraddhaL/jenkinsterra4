@@ -103,6 +103,7 @@ resource "null_resource" "copy_execute" {
     }
     inline = [
       "sudo mkdir -p /end_to_end",
+      "sudo chmod 777 /end_to_end",
       ]
   }
   
