@@ -95,7 +95,6 @@ resource "null_resource" "copy_execute" {
     host  = aws_instance.web.public_ip
     user        = "ec2-user"
     private_key = file("azureaws.pem")
-    agent = true
   }
 
   // copy our example script to the server
