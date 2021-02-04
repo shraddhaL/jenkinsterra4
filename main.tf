@@ -31,9 +31,10 @@ resource "docker_image" "tomcat_image" {
 }
 
 resource "aws_instance" "web" {
-  ami = "ami-01aab85a5e4a5a0fe"
+  ami = "ami-01aab85a5e4a5a0fe" 
     instance_type = "t2.micro"
-   key_name      = "azureaws"
+   key_name = "azureaws"
+   security_groups = ["sg-allow-everything-from-anywhere"]
   tags = {
     Name = "remote-exec-provisioner"
   }
@@ -48,19 +49,17 @@ resource "null_resource" "copy_execute" {
       host        = aws_instance.web.public_ip
       private_key = file("azureaws.pem")
     }
- 
- 
-  
+ provisioner "file" {
+    source      = "end_to_end/docker-compose.yml"
+    destination = "/end_to_end/docker-compose.yml"
+  } 
    provisioner "remote-exec" {
     inline = [
       "cd /end_to_end",
       "docker-compose up -d --scale chrome=3",
     ]
   }
-  provisioner "file" {
-    source      = "end_to_end/docker-compose.yml"
-    destination = "/end_to_end/docker-compose.yml"
-  } 
+  
   depends_on = [ aws_instance.web ]
   
   }
