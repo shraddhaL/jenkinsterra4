@@ -131,7 +131,7 @@ pipeline {
 						    dir('end_to_end') {
 							 script {
 							sh 'docker-compose down'
-							sh 'docker rm -f mytomcat'
+							//sh 'docker rm -f mytomcat'
 						 }
 						}   
 				    }
