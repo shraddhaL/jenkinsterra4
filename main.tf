@@ -34,7 +34,7 @@ resource "aws_instance" "web" {
   ami = "ami-01aab85a5e4a5a0fe" 
     instance_type = "t2.micro"
    key_name = "azureaws"
-   security_groups = ["sg-allow-everything-from-anywhere"]
+   
   tags = {
     Name = "remote-exec-provisioner"
   }
