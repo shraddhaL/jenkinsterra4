@@ -166,16 +166,21 @@ pipeline {
 	    
 	    
 	    
-	 
+	 /*
 	   stage('terraform destroy') {
 	      steps {
-                    sh 'terraform destroy --auto-approve'
+                    
 		      //terraform destroy -target=resource_type.resource_name
 	      }
         }
 	  
  
-	 
+	 */
 	 
     }
+	post{
+		always{
+		         sh 'terraform destroy --auto-approve'
+		}
+	}
 }
