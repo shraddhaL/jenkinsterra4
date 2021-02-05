@@ -150,7 +150,7 @@ pipeline {
 	     stage('terraform apply aws_tomcat') {
 	      steps {
 		         sh 'sudo chmod 777 /opt/tomcat/tomcat9/webapps'
-		   //   sh 'sudo chmod 777 /opt/tomcat/tomcat9/webapps/roshambo.war'
+		  sh 'sudo chmod 777 /opt/tomcat/tomcat9/webapps/roshambo.war'
                     sh 'terraform apply  -auto-approve=true  -target=module.aws_tomcat'
 	      }
         }
