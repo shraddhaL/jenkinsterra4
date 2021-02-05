@@ -133,7 +133,7 @@ pipeline {
 		    }}
 	    }
 	 }
-	    stage('docker clean') {
+	 /*   stage('docker clean') {
 					    steps { 
 						    dir('end_to_end') {
 							 script {
@@ -143,7 +143,7 @@ pipeline {
 						}   
 				    }
 				}
-
+*/
 	  
 	    stage('Deploy on azure vm') {
 			     steps {
