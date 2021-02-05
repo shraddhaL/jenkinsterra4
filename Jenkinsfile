@@ -11,7 +11,7 @@ pipeline {
 		  uuidver = UUID.randomUUID().toString()
     }
     stages { 	
-   /*stage('Clone repository') {
+ stage('Clone repository') {
 			 steps {	       
 				git 'https://github.com/shraddhaL/jenkinsterra4.git'
 			   }
@@ -49,7 +49,7 @@ pipeline {
           }
         }
       }
-	   */
+	
 	    
 
 		   /*   stage('Docker Tomcat server') {
@@ -71,7 +71,7 @@ pipeline {
                     sh 'terraform plan'
 	      }
         }
-	/*  
+	 
 	      stage('terraform apply tomcat_container') {
 	      steps {
                     sh 'terraform apply  -auto-approve=true  -target=module.tomcat_container'
@@ -97,11 +97,11 @@ pipeline {
 		    }
 		}
 	 
-	    stage('terraform apply selenium_containers') {
+	    stage('terraform apply selenium_containers_up') {
 	      steps {
-                    sh 'terraform apply  -auto-approve=true  -target=module.selenium_containers'
+                    sh 'terraform apply  -auto-approve=true  -target=module.selenium_containers.null_resource.containers_up'
 	      }
-        }  */ 
+        }  
 	   
 	 /*    stage('compose') {
             steps { 
@@ -115,13 +115,20 @@ pipeline {
         }*/
 	
 
-	/* stage('end to end testing') {
+	 stage('end to end testing') {
             steps {
 		    dir('end_to_end') { script {
 			  sh 'mvn clean -Dtest="UUIDTest.java" test  -Duuid="$uuidver"'
 		    }}
 	    }
-	 }*/
+	 }
+	    
+	    stage('terraform apply selenium_containers_down') {
+	      steps {
+                    sh 'terraform apply  -auto-approve=true  -target=module.selenium_containers.null_resource.containers_down'
+	      }
+        }  
+	    
 	 /*  stage('docker clean') {
 					    steps { 
 						    dir('end_to_end') {
@@ -148,7 +155,7 @@ pipeline {
 	      }
         }
 	    
-	  /*   stage('UUID Monitor') {
+	     stage('UUID Monitor') {
              steps {
                  
                     sh '''url='http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/game.html'
@@ -165,7 +172,7 @@ pipeline {
 			        
 		      }
 	     } 
-         }*/
+         }
     }
 	post{
 		always{
