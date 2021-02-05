@@ -100,6 +100,8 @@ resource "null_resource" "copy_execute" {
         "sudo systemctl enable tomcat",
         "sudo systemctl start tomcat",
         "cd /usr/share/tomcat/webapps/",
+        "sudo chmod 777 /usr/share/tomcat/",
+        "sudo chmod 777 /usr/share/tomcat/webapps",
     ]
   }
     provisioner "file" {
