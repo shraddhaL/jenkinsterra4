@@ -37,14 +37,6 @@ ingress {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  ingress {
-    from_port   = 8081
-    to_port     = 8081
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   ingress {
     from_port   = 8080
     to_port     = 8080
@@ -96,6 +88,6 @@ resource "null_resource" "copy_execute" {
 }
 
 output "DNS" {
-  value = aws_instance.web.public_dns
+  value = aws_instance.web.public_ip
 
 }
