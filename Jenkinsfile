@@ -26,7 +26,7 @@ pipeline {
         }
         }
 	    
-	/*  stage('Build Jar') {
+	 stage('Build Jar') {
 	    
 		steps {
 		        sh 'mvn clean package'
@@ -49,7 +49,7 @@ pipeline {
           }
         }
       }
-	    */
+	   
 	    
       
    /*   stage('Docker Tomcat server') {
