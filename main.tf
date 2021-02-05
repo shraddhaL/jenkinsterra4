@@ -88,17 +88,6 @@ resource "null_resource" "copy_execute" {
     private_key = file("azureaws.pem")
   }
 
-  provisioner "file" {
-    source      = "/var/lib/jenkins/workspace/java/target/roshambo.war"
-    destination = "/usr/share/tomcat/webapps/roshambo.war"
-  
-   connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      host        = aws_instance.web.public_ip 
-      private_key = file("azureaws.pem")
-    }
-  } 
   provisioner "remote-exec" {
       connection {
       type        = "ssh"
@@ -113,7 +102,17 @@ resource "null_resource" "copy_execute" {
         "cd /usr/share/tomcat/webapps/",
     ]
   }
+    provisioner "file" {
+    source      = "/var/lib/jenkins/workspace/java/target/roshambo.war"
+    destination = "/usr/share/tomcat/webapps/roshambo.war"
   
+   connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = aws_instance.web.public_ip 
+      private_key = file("azureaws.pem")
+    }
+  } 
     depends_on = [ aws_instance.web ]
 }
 
