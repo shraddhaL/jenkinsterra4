@@ -7,15 +7,15 @@ terraform {
   }
 }
 provider "aws" {
-   access_key = "AKIAUKBXP6VH4WUSR6GX"
-   secret_key = "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"
+   access_key = ""
+   secret_key = ""
    region = "us-east-2"
 }
 resource "aws_instance" "web" {
   ami = "ami-01aab85a5e4a5a0fe" 
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.webSG2.id]
-  key_name = "azureaws"
+  key_name = ""
   user_data = "${file("./aws_tomcat/install_tomcat.sh")}"
   associate_public_ip_address = true
   tags = {
