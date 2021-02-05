@@ -26,13 +26,13 @@ pipeline {
         }
         }
 	    
-	  stage('Build Jar') {
+	/*  stage('Build Jar') {
 	    
 		steps {
 		        sh 'mvn clean package'
         }
         }
-	/*  stage('Build Image') {
+	  stage('Build Image') {
             steps {
                 script {
                 	app = docker.build(registry)
