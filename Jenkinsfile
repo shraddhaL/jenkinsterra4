@@ -32,7 +32,7 @@ pipeline {
 		        sh 'mvn clean package'
         }
         }
-	  stage('Build Image') {
+	/*  stage('Build Image') {
             steps {
                 script {
                 	app = docker.build(registry)
@@ -49,7 +49,7 @@ pipeline {
           }
         }
       }
-	    
+	    */
 	    
       
    /*   stage('Docker Tomcat server') {
