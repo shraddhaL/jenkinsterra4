@@ -72,9 +72,9 @@ pipeline {
 	      }
         }
 	 
-	      stage('terraform apply') {
+	      stage('terraform apply tomcat_container') {
 	      steps {
-                    sh 'terraform apply  -auto-approve=true'
+                    sh 'terraform apply  -auto-approve=true  -target=module.tomcat_container'
 	      }
         }
 	 
@@ -108,7 +108,12 @@ pipeline {
             }
         }
 	    
-	    
+	    stage('terraform apply selenium_containers') {
+	      steps {
+                    sh 'terraform apply  -auto-approve=true  -target=module.selenium_containers'
+	      }
+        }
+	   
 	 /*    stage('compose') {
             steps { 
 		    dir('end_to_end') {
@@ -146,6 +151,11 @@ pipeline {
 		             }
          		}
 	    
+	     stage('terraform apply aws_tomcat') {
+	      steps {
+                    sh 'terraform apply  -auto-approve=true  -target=module.aws_tomcat'
+	      }
+        }
 	    
 	     stage('UUID Monitor') {
              steps {
@@ -165,20 +175,6 @@ pipeline {
 		      }
 	     }
          } 
-	    
-	    
-	    
-	 /*
-	   stage('terraform destroy') {
-	      steps {
-                    
-		      //terraform destroy -target=resource_type.resource_name
-	      }
-        }
-	  
- 
-	 */
-	 
     }
 	post{
 		always{
