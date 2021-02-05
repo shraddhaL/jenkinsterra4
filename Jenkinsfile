@@ -11,8 +11,8 @@ pipeline {
 		  uuidver = UUID.randomUUID().toString()
     }
     stages { 	
- stage('Clone repository') {
-			  /* steps {	       
+   /*stage('Clone repository') {
+			 steps {	       
 				git 'https://github.com/shraddhaL/jenkinsterra4.git'
 			   }
 			   }
@@ -152,20 +152,20 @@ pipeline {
              steps {
                  
                     sh '''url='http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/game.html'
-		    
-		code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null`'''
+		     
+		    code=`curl -sL --connect-timeout 20 --max-time 30 -w "%{http_code}\\\\n" "$url" -o /dev/null`'''
 		     
 		       script{
-			def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/version.html', returnStdout: true)
-		 if(env.uuidver == var)
-		      echo 'Latest version'
-		 else
-		      echo 'Older version'
+				def var = sh(script: 'curl http://devopsteamgoa.westindia.cloudapp.azure.com:8081/roshambo/version.html', returnStdout: true)
+			 if(env.uuidver == var)
+			      echo 'Latest version'
+			 else
+			      echo 'Older version'
 			       
 			        
 		      }
-	     }
-         } */
+	     } 
+         }*/
     }
 	post{
 		always{
