@@ -178,6 +178,12 @@ pipeline {
     }
 	post{
 		always{
+			 dir('end_to_end') {
+							
+							sh 'docker-compose down'
+							//sh 'docker rm -f mytomcat'
+			 }
+				 
 		         sh 'terraform destroy --auto-approve'
 		}
 	}
