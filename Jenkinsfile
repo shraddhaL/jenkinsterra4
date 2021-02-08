@@ -10,13 +10,13 @@ pipeline {
 		// UUID uuid = UUID.randomUUID()
 		  uuidver = UUID.randomUUID().toString()
     }
-    stages { 	
+    stages{ 	
 
 	     stage('Clone repository') {
 			 steps {	       
 				git 'https://github.com/shraddhaL/jenkinsterra4.git'
 			   }
-			   }
+		 }
 	    
 	     stage('UUID gen') {
 	    
@@ -175,7 +175,9 @@ pipeline {
 		      }
 	     } 
          }
-    }post{
+    }
+	
+post{
 		always{
 			  
 		         sh 'terraform destroy --auto-approve'
