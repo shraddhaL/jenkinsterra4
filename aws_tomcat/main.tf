@@ -62,6 +62,18 @@ resource "null_resource" "copy_execute" {
     private_key = file("azureaws.pem")
   }
 
+    provisioner "remote-exec" {
+      connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = aws_instance.web.public_ip 
+      private_key = file("azureaws.pem")
+    }
+    inline = [
+        "sudo chmod 777 /usr/share/tomcat/",
+        "sudo chmod 777 /usr/share/tomcat/webapps",
+    ]
+  }
     provisioner "file" {
     source      = "/opt/tomcat/tomcat9/webapps/roshambo.war"
     destination = "/usr/share/tomcat/webapps"
