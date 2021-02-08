@@ -37,6 +37,7 @@ resource "aws_instance" "web" {
       type  = "ssh"
     host  = aws_instance.web.public_ip
     user        = "ec2-user"
+        private_key = file("azureaws.pem")
     }
     inline = [
     "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
