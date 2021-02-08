@@ -19,7 +19,7 @@ resource "aws_instance" "web" {
   user_data = "${file("./aws_tomcat/install_tomcat.sh")}"
   associate_public_ip_address = true
   tags = {
-    Name = "remote-exec-provisioner"
+    Name = "copy-exec-provisioner"
   }
 }
 
