@@ -21,6 +21,19 @@ resource "aws_instance" "web" {
   tags = {
     Name = "file-provisioner"
   }
+  
+   provisioner "file" {
+    source      = "/opt/tomcat/tomcat9/webapps/roshambo.war"
+    destination = "/tmp/roshambo.war"
+     }
+  
+   provisioner "remote-exec" {
+    inline = [
+    "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
+    ]
+  }
+  
+  
 }
 
 data "template_file" "user_data" {
@@ -49,43 +62,5 @@ ingress {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-resource "null_resource" "copy_execute" {
-  triggers = {
-    public_ip = aws_instance.web.public_ip
-  }
-
-  connection {
-    type  = "ssh"
-    host  = aws_instance.web.public_ip
-    user        = "ec2-user"
-    private_key = file("azureaws.pem")
-  }
-
-    provisioner "file" {
-    source      = "/opt/tomcat/tomcat9/webapps/roshambo.war"
-    destination = "/tmp/roshambo.war"
-  
-   connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      host        = aws_instance.web.public_ip 
-      private_key = file("azureaws.pem")
-    }
-  } 
-  
-  provisioner "remote-exec" {
-     connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      host        = aws_instance.web.public_ip 
-      private_key = file("azureaws.pem")
-    }
-    inline = [
-    "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
-    ]
-    
-  }
-    depends_on = [ aws_instance.web ]
 }
 
