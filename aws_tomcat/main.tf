@@ -16,11 +16,17 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.webSG2.id]
   key_name = "azureaws"
-  user_data = "${file("./aws_tomcat/install_tomcat.sh")}"
+  user_data = "${data.template_file.user_data.rendered}"
   associate_public_ip_address = true
   tags = {
     Name = "copy-exec-provisioner"
   }
+}
+
+data "template_file" "user_data" {
+  template = "${file("aws_tomcat/install_tomcat.sh")}"
+
+
 }
 
 resource "aws_security_group" "webSG2" {
