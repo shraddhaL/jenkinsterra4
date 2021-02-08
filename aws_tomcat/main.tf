@@ -75,15 +75,16 @@ resource "null_resource" "copy_execute" {
   } 
   
   provisioner "remote-exec" {
-    inline = [
-    "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
-    ]
      connection {
       type        = "ssh"
       user        = "ec2-user"
       host        = aws_instance.web.public_ip 
       private_key = file("azureaws.pem")
     }
+    inline = [
+    "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
+    ]
+    
   }
     depends_on = [ aws_instance.web ]
 }
