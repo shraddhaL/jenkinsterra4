@@ -24,7 +24,9 @@ resource "aws_instance" "web" {
   
    provisioner "file" {
       connection {
-      host        = aws_instance.web.public_ip 
+     type  = "ssh"
+    host  = aws_instance.web.public_ip
+    user        = "ec2-user"
     }
     source      = "/opt/tomcat/tomcat9/webapps/roshambo.war"
     destination = "/tmp/roshambo.war"
@@ -32,7 +34,9 @@ resource "aws_instance" "web" {
   
    provisioner "remote-exec" {
       connection {
-      host        = aws_instance.web.public_ip  
+      type  = "ssh"
+    host  = aws_instance.web.public_ip
+    user        = "ec2-user"
     }
     inline = [
     "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
