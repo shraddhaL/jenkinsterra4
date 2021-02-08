@@ -16,41 +16,11 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.webSG2.id]
   key_name = "azureaws"
-  user_data = "${data.template_file.user_data.rendered}"
+ 
   associate_public_ip_address = true
   tags = {
-    Name = "file-provisioner"
+    Name = "remote-exec-provisioner"
   }
-  
-   provisioner "file" {
-      connection {
-     type  = "ssh"
-    host  = aws_instance.web.public_ip
-    user        = "ec2-user"
-    }
-    source      = "/opt/tomcat/tomcat9/webapps/roshambo.war"
-    destination = "/tmp/roshambo.war"
-     }
-  
-   provisioner "remote-exec" {
-      connection {
-      type  = "ssh"
-    host  = aws_instance.web.public_ip
-    user        = "ec2-user"
-        private_key = file("azureaws.pem")
-    }
-    inline = [
-    "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
-    ]
-  }
-  
-  
-}
-
-data "template_file" "user_data" {
-  template = "${file("aws_tomcat/install_tomcat.sh")}"
-
-
 }
 
 resource "aws_security_group" "webSG2" {
@@ -75,3 +45,49 @@ ingress {
   }
 }
 
+resource "null_resource" "copy_execute" {
+  triggers = {
+    public_ip = aws_instance.web.public_ip
+  }
+
+  connection {
+    type  = "ssh"
+    host  = aws_instance.web.public_ip
+    user        = "ec2-user"
+    private_key = file("azureaws.pem")
+  }
+
+  provisioner "remote-exec" {
+      connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = aws_instance.web.public_ip 
+      private_key = file("azureaws.pem")
+    }
+    inline = [
+        "sudo amazon-linux-extras install tomcat8.5 -y",
+        "sudo systemctl enable tomcat",
+        "sudo systemctl start tomcat",
+        "cd /usr/share/tomcat/webapps/",
+        "sudo chmod 777 /usr/share/tomcat/",
+        "sudo chmod 777 /usr/share/tomcat/webapps",
+    ]
+  }
+    provisioner "file" {
+    source      = "/opt/tomcat/tomcat9/webapps/roshambo.war"
+    destination = "/usr/share/tomcat/webapps/roshambo.war"
+  
+   connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = aws_instance.web.public_ip 
+      private_key = file("azureaws.pem")
+    }
+  } 
+    depends_on = [ aws_instance.web ]
+}
+
+output "DNS" {
+  value = aws_instance.web.public_ip
+
+}
