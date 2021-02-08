@@ -64,7 +64,7 @@ resource "null_resource" "copy_execute" {
 
     provisioner "file" {
     source      = "/opt/tomcat/tomcat9/webapps/roshambo.war"
-    destination = "/tmp"
+    destination = "/tmp/roshambo.war"
   
    connection {
       type        = "ssh"
