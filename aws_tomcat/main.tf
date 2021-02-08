@@ -19,7 +19,7 @@ resource "aws_instance" "web" {
   user_data = "${data.template_file.user_data.rendered}"
   associate_public_ip_address = true
   tags = {
-    Name = "copy-exec-provisioner"
+    Name = "remote-exec-provisioner"
   }
 }
 
