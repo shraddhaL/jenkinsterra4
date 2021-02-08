@@ -64,7 +64,7 @@ resource "null_resource" "copy_execute" {
 
     provisioner "file" {
     source      = "/opt/tomcat/tomcat9/webapps/roshambo.war"
-    destination = "cd ~/../../usr/share/tomcat/webapps/roshambo.war"
+    destination = "/tmp"
   
    connection {
       type        = "ssh"
@@ -73,6 +73,12 @@ resource "null_resource" "copy_execute" {
       private_key = file("azureaws.pem")
     }
   } 
+  
+  provisioner "remote-exec" {
+    inline = [
+    "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
+    ]
+  }
     depends_on = [ aws_instance.web ]
 }
 
