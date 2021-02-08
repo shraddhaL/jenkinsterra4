@@ -5,4 +5,3 @@ sudo systemctl start tomcat
 cd /usr/share/tomcat/webapps/
 sudo chmod 777 /usr/share/tomcat/
 sudo chmod 777 /usr/share/tomcat/webapps
-
