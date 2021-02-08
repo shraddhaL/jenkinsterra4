@@ -19,7 +19,7 @@ resource "aws_instance" "web" {
   user_data = "${data.template_file.user_data.rendered}"
   associate_public_ip_address = true
   tags = {
-    Name = "remote-exec-provisioner"
+    Name = "file-provisioner"
   }
 }
 
@@ -78,6 +78,12 @@ resource "null_resource" "copy_execute" {
     inline = [
     "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
     ]
+     connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      host        = aws_instance.web.public_ip 
+      private_key = file("azureaws.pem")
+    }
   }
     depends_on = [ aws_instance.web ]
 }
