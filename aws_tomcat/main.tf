@@ -64,7 +64,7 @@ resource "null_resource" "copy_execute" {
 
     provisioner "file" {
     source      = "/var/lib/jenkins/workspace/java/target/roshambo.war"
-    destination = "/usr/share/tomcat/webapps/roshambo.war"
+    destination = "/usr/share/tomcat/webapps"
   
    connection {
       type        = "ssh"
