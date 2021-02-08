@@ -24,10 +24,7 @@ resource "aws_instance" "web" {
   
    provisioner "file" {
       connection {
-      type        = "ssh"
-      user        = "ec2-user"
       host        = aws_instance.web.public_ip 
-      private_key = file("azureaws.pem")
     }
     source      = "/opt/tomcat/tomcat9/webapps/roshambo.war"
     destination = "/tmp/roshambo.war"
@@ -35,10 +32,7 @@ resource "aws_instance" "web" {
   
    provisioner "remote-exec" {
       connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      host        = aws_instance.web.public_ip 
-      private_key = file("azureaws.pem")
+      host        = aws_instance.web.public_ip  
     }
     inline = [
     "cp /tmp/roshambo.war /usr/share/tomcat/webapps/roshambo.war",
