@@ -16,6 +16,7 @@ pipeline {
 	     stage('terraform apply aws_tomcat') {
 	      steps {
 		       sh 'terraform init'
+		      sh 'terraform plan'
 		         sh 'sudo chmod 777 /opt/tomcat/tomcat9/webapps'
 		  sh 'sudo chmod 777 /opt/tomcat/tomcat9/webapps/roshambo.war'
                     sh 'terraform apply  -auto-approve=true  -target=module.aws_tomcat'
