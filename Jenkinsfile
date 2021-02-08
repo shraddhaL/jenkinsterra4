@@ -174,10 +174,5 @@ pipeline {
 	     } 
          }
     }
-	post{
-		always{
-			  
-		         sh 'terraform destroy --auto-approve'
-		}
-	}
+	
 }
