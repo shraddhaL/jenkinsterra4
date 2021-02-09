@@ -20,8 +20,6 @@ variable "private_key" {
 
  module "aws_tomcat" {
   source = "./aws_tomcat"
-     access=var.access 
-   secret=var.secret
-   private_key=var.private_key
+   
 }   
 
