@@ -9,9 +9,7 @@ module "tomcat_container" {
    
  module "aws_tomcat" {
   source = "./aws_tomcat"
-    access_key = var.access
-   secret_key = var.secret
-   private_key  = var.private_key
+   
 }   
 variable "access" {
   type = string
