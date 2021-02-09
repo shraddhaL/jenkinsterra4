@@ -79,7 +79,9 @@ provisioner "file" {
 
 output "DNS" {
   value = aws_instance.web.public_ip
-  value2=format("Access the AWS hosted webapp from here: http://%s%s", aws_instance.web.public_dns, ":8080/roshambo")
+}
+output "aws_link" {
+  value=format("Access the AWS hosted webapp from here: http://%s%s", aws_instance.web.public_dns, ":8080/roshambo")
 }
 
 data "template_file" "asg_init" {
