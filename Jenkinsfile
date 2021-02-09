@@ -14,10 +14,16 @@ pipeline {
 	     stage('terraform apply aws_tomcat') {
 	      steps {
 		       sh 'terraform init'
-		      sh 'terraform plan'
-		         sh 'sudo chmod 777 /opt/tomcat/tomcat9/webapps'
-		  sh 'sudo chmod 777 /opt/tomcat/tomcat9/webapps/roshambo.war'
-                    sh 'terraform apply  -auto-approve=true  -target=module.aws_tomcat'
+		       sh 'terraform plan'
+		       sh 'sudo chmod 777 /opt/tomcat/tomcat9/webapps'
+		       sh 'sudo chmod 777 /opt/tomcat/tomcat9/webapps/roshambo.war'
+		      
+		      
+		      
+		withCredentials([string(credentialsId: 'access', variable: 'access_key'), string(credentialsId: 'secret', variable: 'secret_key'),string(credentialsId: 'private_key', variable: 'private_key')]){
+				sh 'terraform init'
+				sh 'terraform apply -auto-approve -var "access=$access_key" -var "secret=$secret_key" -var "private_key=$private_key" -target=module.aws_tomcat'
+		}
 	      }
         }
 	    
