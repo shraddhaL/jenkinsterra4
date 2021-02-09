@@ -20,7 +20,7 @@ pipeline {
 		      
 		withCredentials([string(credentialsId: 'access', variable: 'access_key'), string(credentialsId: 'secret', variable: 'secret_key'),file(credentialsId: 'private_key', variable: 'private_key')]){
 				sh 'terraform init'
-				sh 'terraform apply  -var "access=$access_key" -var "secret=$secret_key" -var "private_key=$private_key"  -auto-approve'
+				sh 'terraform apply -target=module.aws_tomcat -var "access=$access_key" -var "secret=$secret_key" -var "private_key=$private_key"  -auto-approve'
 		}
 	      }
         }
