@@ -11,12 +11,4 @@ module "tomcat_container" {
   source = "./aws_tomcat"
    
 }   
-variable "access" {
-  type = string
-}
-variable "secret" {
-  type = string
-}
-variable "private_key" {
-  type = string
-}
+
