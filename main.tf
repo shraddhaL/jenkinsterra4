@@ -1,6 +1,9 @@
 variable "private_key" {
   type = string
 }
+variable "public_key" {
+  type = string
+}
 variable "secret" {
   type = string
 }
@@ -23,7 +26,7 @@ provider "aws" {
 
 resource "aws_key_pair" "my_key" {
   key_name   = "mykey"
-  private_key =file(var.private_key)
+  private_key =file(var.public_key)
 }
 resource "aws_instance" "web" {
   ami = "ami-01aab85a5e4a5a0fe" 
