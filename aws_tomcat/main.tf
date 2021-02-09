@@ -80,13 +80,4 @@ output "aws_link" {
 data "template_file" "asg_init" {
   template = file("${path.module}/userdata.tpl")
 }
-variable "access" {
-  type = string
-}
-variable "secret" {
-  type = string
-}
-variable "private_key" {
-  type = string
-}
 
