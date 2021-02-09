@@ -1,4 +1,13 @@
 
+variable "private_key" {
+  type = string
+}
+variable "secret" {
+  type = string
+}
+variable "access" {
+  type = string
+}
 module "tomcat_container" {
   source = "./tomcat_container"
 }
@@ -9,15 +18,6 @@ module "tomcat_container" {
 
 
 
-variable "private_key" {
-  type = string
-}
-variable "secret" {
-  type = string
-}
-variable "access" {
-  type = string
-}
  module "aws_tomcat" {
   source = "./aws_tomcat"
    
