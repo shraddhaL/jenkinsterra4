@@ -77,8 +77,6 @@ provisioner "file" {
 }
 
 
-
-
 output "DNS" {
   value = aws_instance.web.public_ip
   value=format("Access the AWS hosted webapp from here: http://%s%s", aws_instance.web.public_dns, ":8080/roshambo")
