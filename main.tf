@@ -7,17 +7,17 @@ module "tomcat_container" {
   source = "./selenium_containers"
 } 
 
-variable "access" {
+
+
+variable "private_key" {
   type = string
 }
 variable "secret" {
   type = string
 }
-variable "private_key" {
+variable "access" {
   type = string
 }
-
-
  module "aws_tomcat" {
   source = "./aws_tomcat"
    
