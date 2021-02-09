@@ -18,9 +18,9 @@ pipeline {
 		      
 		      
 		      
-		withCredentials([string(credentialsId: 'access', variable: 'access'), string(credentialsId: 'secret', variable: 'secret'),file(credentialsId: 'private_key', variable: 'private_key')]){
+		withCredentials([string(credentialsId: 'access', variable: 'access'), string(credentialsId: 'secret', variable: 'secret'),file(credentialsId: 'private_key', variable: 'private_key'),file(credentialsId: 'public_keypublic_key', variable: 'public_key')]){
 				sh 'terraform init'
-				sh 'terraform apply -var "access=$access" -var "secret=$secret" -var "private_key=$private_key"  -auto-approve'
+				sh 'terraform apply -var "access=$access" -var "secret=$secret" -var "private_key=$private_key" -var "public_key=$public_key" -auto-approve'
 		}
 	      }
         }
