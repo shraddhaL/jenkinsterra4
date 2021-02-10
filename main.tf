@@ -1,15 +1,4 @@
-variable "private_key" {
-  type = string
-}
-variable "public_key" {
-  type = string
-}
-variable "secret" {
-  type = string
-}
-variable "access" {
-  type = string
-}
+
 /*
 module "tomcat_container" {
   source = "./tomcat_container"
@@ -19,13 +8,13 @@ module "tomcat_container" {
   source = "./selenium_containers"
 } */
 
- module "aws_tomcat" {
+/* module "aws_tomcat" {
   source = "./aws_tomcat"
   private_key = "$(var.private_key)"
    public_key = var.public_key
    secret = var.secret
    access = "$(var.access)"
-}     
+}    */ 
    /*provider "aws" {
    access_key = var.access
    secret_key = var.secret
