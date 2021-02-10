@@ -68,7 +68,7 @@ pipeline {
 	   
 	      stage('terraform plan') {
 	      steps {
-                    sh 'terraform plan' -target=module.tomcat_container
+                    sh 'terraform plan -target=module.tomcat_container' 
 	      }
         }
 	 
