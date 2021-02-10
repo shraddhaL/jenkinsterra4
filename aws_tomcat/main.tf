@@ -1,4 +1,4 @@
-/*variable "private_key" {
+variable "private_key" {
   type = string
 }
 variable "public_key" {
@@ -10,9 +10,9 @@ variable "secret" {
 variable "access" {
   type = string
 }
-*/
+
 provider "aws" {
-   access_key = "$(module.aws_tomcat.access)"
+   access_key = var.access
    secret_key = var.secret
    region = "us-east-2"
 }
