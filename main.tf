@@ -21,6 +21,10 @@ module "tomcat_container" {
 
  module "aws_tomcat" {
   source = "./aws_tomcat"
+   private_key = var.private_key
+   public_key = var.public_key
+   secret = var.secret
+   access = var.access
 }     
    /*provider "aws" {
    access_key = var.access
