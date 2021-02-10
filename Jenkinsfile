@@ -60,7 +60,7 @@ post{
 			 sh '''cd aws_tomcat
 		             terraform destroy  -var "access=$access" -var "secret=$secret" -var "private_key=$private_key" -var "public_key=$public_key"  --auto-approve
 			  '''
-				//sh 'terraform destroy --auto-approve'
+			sh 'terraform destroy --auto-approve'
 			 }
 		}
 	}
