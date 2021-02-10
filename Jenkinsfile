@@ -53,7 +53,7 @@ post{
 			  sh '''cd aws_tomcat
 		             terraform destroy --auto-approve
 			  '''
-		         sh 'terraform destroy --auto-approve'
+		        // sh 'terraform destroy --auto-approve'
 		}
 	}
 	
