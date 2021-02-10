@@ -98,7 +98,7 @@ pipeline {
 		}
 	 stage('terraform plan selenium ') {
 	      steps {
-                    sh 'terraform plan' -target=module.selenium_containers
+                    sh 'terraform plan -target=module.selenium_containers'
 	      }}
 	    
 	    stage('terraform apply selenium_containers_up') {
