@@ -12,7 +12,7 @@ variable "access" {
 }
 */
 provider "aws" {
-   access_key = var.access
+   access_key = "$(module.aws_tomcat.access)"
    secret_key = var.secret
    region = "us-east-2"
 }
