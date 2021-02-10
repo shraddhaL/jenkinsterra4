@@ -33,7 +33,7 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.webSG2.id]
   key_name = aws_key_pair.my_key.key_name
-  key_name = var.private_key
+  //key_name = var.private_key
   user_data = data.template_file.asg_init.rendered
   associate_public_ip_address = true
   tags = {
