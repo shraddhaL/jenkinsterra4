@@ -1,4 +1,4 @@
-
+/*
 variable "private_key" {
   type = string
 }
@@ -10,7 +10,7 @@ variable "secret" {
 }
 variable "access" {
   type = string
-}
+}*/
 
 provider "aws" {
    access_key = var.access
