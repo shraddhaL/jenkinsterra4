@@ -1,5 +1,16 @@
 
-
+variable "private_key" {
+  type = string
+}
+variable "public_key" {
+  type = string
+}
+variable "secret" {
+  type = string
+}
+variable "access" {
+  type = string
+}
 
 provider "aws" {
    access_key = var.access
@@ -8,8 +19,8 @@ provider "aws" {
 }
 
 resource "aws_key_pair" "my_key" {
-  key_name   = "mykey"
-  private_key =file(var.private_key)
+  key_name   = "my_key"
+  public_key =file(var.public_key)
 }
 resource "aws_instance" "web" {
   ami = "ami-01aab85a5e4a5a0fe" 
@@ -82,4 +93,3 @@ output "aws_link" {
 data "template_file" "asg_init" {
   template = file("${path.module}/userdata.tpl")
 }
-
