@@ -22,7 +22,7 @@ pipeline {
 				sh 'terraform init'
 			//sh 'terraform apply -var "access=$access" -var "secret=$secret" -var "private_key=$private_key" -auto-approve'
 		
-				sh 'terraform apply -var "access=$access" -var "secret=$secret" -var "private_key=$private_key" -var "public_key=$public_key" -auto-approve'
+				sh 'terraform apply -target module.aws_tomcat -var "access=$access" -var "secret=$secret" -var "private_key=$private_key" -var "public_key=$public_key" -auto-approve'
 		}
 	      }
         }
