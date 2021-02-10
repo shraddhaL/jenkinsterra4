@@ -1,5 +1,4 @@
-
-/*variable "private_key" {
+variable "private_key" {
   type = string
 }
 variable "public_key" {
@@ -10,7 +9,7 @@ variable "secret" {
 }
 variable "access" {
   type = string
-}*/
+}
 
 provider "aws" {
    access_key = var.access
@@ -25,7 +24,7 @@ resource "aws_key_pair" "my_key" {
 resource "aws_instance" "web" {
   ami = "ami-01aab85a5e4a5a0fe" 
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.webSG2.id]
+  vpc_security_group_ids = [aws_security_group.webSG21.id]
   key_name = aws_key_pair.my_key.key_name
   user_data = data.template_file.asg_init.rendered
   associate_public_ip_address = true
@@ -34,7 +33,7 @@ resource "aws_instance" "web" {
   }
 }
 
-resource "aws_security_group" "webSG2" {
+resource "aws_security_group" "webSG21" {
   name        = "webSG2"
   egress {
     from_port   = 0
