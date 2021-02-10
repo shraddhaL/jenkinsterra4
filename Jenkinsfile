@@ -68,7 +68,7 @@ pipeline {
 	   
 	      stage('terraform plan') {
 	      steps {
-                    sh 'terraform plan'
+                    sh 'terraform plan' -target=module.tomcat_container
 	      }
         }
 	 
@@ -96,7 +96,10 @@ pipeline {
 		      }
 		    }
 		}
-	 
+	 stage('terraform plan selenium ') {
+	      steps {
+                    sh 'terraform plan' -target=module.selenium_containers
+	      }
 	    stage('terraform apply selenium_containers_up') {
 	      steps {
                     sh 'terraform apply  -auto-approve=true  -target=module.selenium_containers.null_resource.containers_up'
@@ -122,7 +125,7 @@ pipeline {
 		    }}
 	    }
 	 }
-	    
+	     
 	    stage('terraform apply selenium_containers_down') {
 	      steps {
                     sh 'terraform apply  -auto-approve=true  -target=module.selenium_containers.null_resource.containers_down'
